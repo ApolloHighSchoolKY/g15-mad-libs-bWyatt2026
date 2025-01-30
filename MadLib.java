@@ -28,37 +28,45 @@ public class MadLib
 	public MadLib(String fileName)
 	{
 		//load stuff
-		
+		loadNouns();
+		loadAdjectives();
+		loadVerbs();
+
 		try
 		{
 			Scanner wordScan = new Scanner(new File("story.dat"));
-			//Read the different parts of the story and concatenate the resulting
+			Scanner storyScan = new Scanner(story);
 
-			//While there is more of the story, read in the word/symbol
+			//Read the different parts of the story and concatenate the resulting
 			while(wordScan.hasNext())
 			{
-				String x = wordScan.next();
+				story += " " + wordScan.next();
+			}
+			//While there is more of the story, read in the word/symbol
+			while(storyScan.hasNext())
+			{
+				String x = storyScan.next();
 				if(x.equals("#"))
 				{
 					//If what was read in is one of the symbols, find a random
 					//word to replace it.
-					story+= getRandomNoun();
-				}
-				else if(x.equals("&"))
-				{
-					story+= getRandomAdjective();
-
+					story+= " " + getRandomNoun();
 				}
 				else if(x.equals("@"))
 				{
-					story+= getRandomVerb();
+					story+= " " +getRandomVerb();
+				}
+				else if(x.equals("&"))
+				{
+					story+= " " + getRandomAdjective();
 				}
 				else
 				{
-					story += "" + wordScan.next();
+					story += " " + storyScan.next();
 				}
 			}
 			wordScan.close();
+			storyScan.close();
 		}
 		catch(Exception e)
 		{
@@ -120,17 +128,20 @@ public class MadLib
 
 	public String getRandomVerb()
 	{
-		return "" + verbs.get((int)(Math.random()*12+1));
+		int spot = (int)(Math.random()*verbs.size());
+		return "" + verbs.get(spot);
 	}
 
 	public String getRandomNoun()
 	{
-		return "" + nouns.get((int)(Math.random()*18+1));
+		int spot = (int)(Math.random()*nouns.size());
+		return "" + nouns.get(spot);
 	}
 
 	public String getRandomAdjective()
 	{
-		return "" + adjectives.get((int)(Math.random()*15+1));
+		int spot = (int)(Math.random()*adjectives.size());
+		return "" + adjectives.get(spot);
 	}
 
 	public String toString()
