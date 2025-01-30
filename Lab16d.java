@@ -1,4 +1,4 @@
-//© A+ Computer Science  -  www.apluscompsci.com
+//ï¿½ A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
 //Class -
@@ -12,5 +12,6 @@ public class Lab16d
 	{
 		//make a new MadLib and print it
 		MadLib madlib = new MadLib("story.dat");
+		System.out.println(madlib);
 	}
 }
